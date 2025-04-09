@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Grid Overlay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      text-align: center;
+    }
+    .tooltip {
+      position: absolute;
+      background-color: white;
+      font-size: 0.75rem;
+      color: black;
+      padding: 0.25rem 0.5rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.25rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      z-index: 50;
+      display: none;
+      pointer-events: none;
+    }
+/*    .b0 {
+      background-color: #FF0000;
+    }
+    .b1 {
+      background-color: #E31C00;
+    }
+    .b2 {
+      background-color: #C63900;
+    }
+    .b3 {
+      background-color: #AA5500;
+    }
+    .b4 {
+      background-color: #8E7100;
+    }
+    .b5 {
+      background-color: #718E00;
+    }
+    .b6 {
+      background-color: #55AA00;
+    }
+    .b7 {
+      background-color: #39C600;
+    }
+    .b8 {
+      background-color: #1CE300;
+    }
+    .b9 {
+      background-color: #00FF00;
+    } */
+    .b0 {
+      background-color: #FF0000;
+    }
+    .b1 {
+      background-color: #FF3300;
+    }
+    .b2 {
+      background-color: #FF6600;
+    }
+    .b3 {
+      background-color: #FF9900;
+    }
+    .b4 {
+      background-color: #FFCC00;
+    }
+    .b5 {
+      background-color: #FFFF00;
+    }
+    .b6 {
+      background-color: #CCFF00;
+    }
+    .b7 {
+      background-color: #99FF00;
+    }
+    .b8 {
+      background-color: #66FF00;
+    }
+    .b9 {
+      background-color: #00FF00;
+    }
+    .ort, .land {
+      font-weight: bold;
+      background-color: #333;
+      color: white;
+    }
+    .veh {
+      font-weight: bold;
+      background-color: blue;
+      color: white;
+    }
+    .ttc {padding: .2rem;}
+  </style>
+</head>
+<body>
+<!-- Header -->
+<section class="bg-white">
+  <div class="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
+        <h1 class="text-2xl">Rundreise Zürich - Basel - Freiburg - Singen - Zürich</h1>
+  </div>
+</section>
+
+<main class="flex items-center justify-center min-h-screen bg-gray-100">
+
+  <div id="container" class="relative w-[1077px] h-[791px]">
+    <!-- Base image -->
+    <img src="Screenshot 2025-04-09 071218.jpg" width="1077" height="791" alt="map">
+
+    <!-- Tooltip -->
+    <div id="tooltip" class="tooltip"></div>
+
+    <!-- Grid overlay -->
+    <div id="gridOverlay" class="absolute top-0 left-0 w-full h-full grid" style="display: grid; grid-template-columns: repeat(30, 1fr); grid-template-rows: repeat(20, 1fr);">
+      <!-- Cells added via JS -->
+    </div>
+  </div>
+</main>
+<!-- Foooter -->
+<section class="bg-white">
+    <div class="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
+      Map: https://umap.openstreetmap.fr/de/map/anonymous-edit/1204787:5Xc1XM7v5FSmNznDUeM9FfYRQcVaPn0hCUGMRRp_NAQ
+    </div>
+</section>
+  <script>
+    function toolTipHTML(obj) {
+       const ch = (obj["charging_status"]==="Yes") ? ' <span class="chrg">C: ⚡</span>' : ' <span class="nochrg">C: -</span>';
+       return `<div class="ort ttc">${obj["zip_city"]}</div><div class="land ttc">${obj.country}</div><div class="veh ttc">${obj.vehicle}</div><div class="b${Math.floor(obj.battery/10)} ttc">B: ${obj.battery}%${ch}</div>`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // Assuming you have a JSON file named 'data.json'
+      const jsonFilePath = '__tmp_matrix.json';
+
+      // Read JSON file asynchronously
+      fetch(jsonFilePath)
+          .then(response => response.json())
+          .then(data => {
+              // Call a function that processes the data
+              processJsonData(data);
+          })
+          .catch(error => {
+              console.error('Error loading JSON file:', error);
+          });
+
+      function processJsonData(data) {
+          // Your function to process the JSON data goes here
+          // console.log('Processing data:', data);
+          const overlay = document.getElementById('gridOverlay');
+          const tooltip = document.getElementById('tooltip');
+          const container = document.getElementById('container');
+          const base = 15;
+          const factor = 2;
+          for (let i = 0; i < base*10*factor*factor; i++) {
+            const row = Math.floor(i / (base*factor));
+            const col = (i % (base*factor));
+
+            const cell = document.createElement('div');
+            cell.className = 'border border-blue-200 border-opacity-50 relative';
+            cell.dataset.row = row;
+            cell.dataset.col = col;
+
+            cell.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const offsetX = 8;
+              const offsetY = 8;
+              const containerRect = container.getBoundingClientRect();
+              const x = e.clientX - containerRect.left + offsetX;
+              const y = e.clientY - containerRect.top + offsetY;
+
+              tooltip.style.left = `${x}px`;
+              tooltip.style.top = `${y}px`;
+              tooltip.innerHTML = (data[row][col]) ? toolTipHTML(data[row][col]) : `<div>[${row}][${col}]</div>`;
+              tooltip.style.display = 'block';
+            });
+
+            overlay.appendChild(cell);
+          }
+
+          document.addEventListener('click', (e) => {
+            if (!e.target.closest('#gridOverlay')) {
+              tooltip.style.display = 'none';
+            }
+          });
+      }
+
+    });
+  </script>
+</body>
+</html>
