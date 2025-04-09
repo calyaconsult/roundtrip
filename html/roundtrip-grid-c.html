@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vehicle Grid</title>
+  <style>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(17, 40px);
+      grid-template-rows: repeat(12, 40px);
+      gap: 4px;
+      background-color: #f5f5f5;
+      width: max-content;
+      margin: 40px auto;
+    }
+    .dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 10%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid" id="grid"></div>
+
+  <script>
+
+    function reposition(obj) {
+       const newObj = JSON.parse(JSON.stringify(obj));
+       newObj.row = obj.row+1;
+       newObj.col = obj.col+1;
+       return newObj;
+    };
+    // const data = .map(x => reposition(x));
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Wait until the page is fully loaded
+
+        // Assuming you have a JSON file named 'data.json'
+        const jsonFilePath = 'roundtrip-grid.json';
+
+        // Read JSON file asynchronously
+        fetch(jsonFilePath)
+            .then(response => response.json())
+            .then(data => {
+                // Call a function that processes the data
+                processJsonData(data);
+            })
+            .catch(error => {
+                console.error('Error loading JSON file:', error);
+            });
+
+        function processJsonData(data) {
+            // Your function to process the JSON data goes here
+            console.log('Processing data:', data);
+            const grid = document.getElementById("grid");
+
+            const getColor = (battery) => {
+              const norm = battery / 100;
+              const r = Math.round(255 * (1 - norm));
+              const g = Math.round(255 * norm);
+              return `rgb(${r},${g},0)`;
+            };
+
+            data.map(x => reposition(x)).forEach(({ item, row, col, battery, zip_city }) => {
+              if (item == 5) {} else {
+              const div = document.createElement("div");
+              div.className = "dot";
+              div.style.gridRow = row+1;
+              div.style.gridColumn = col+1;
+              div.style.backgroundColor = getColor(battery);
+              div.textContent = 36-item;
+              div.title = `${zip_city} (${battery}%)`;
+              grid.appendChild(div);}
+            });
+        }
+    });
+  </script>
+</body>
+</html>
