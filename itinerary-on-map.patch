@@ -1,0 +1,144 @@
+4,7c4,5
+<   <meta charset="UTF-8" />
+<   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<   <title>Image Grid Overlay</title>
+<   <script src="https://cdn.tailwindcss.com"></script>
+---
+>   <meta charset="UTF-8">
+>   <title>Colored Dots Grid</title>
+10,17c8
+<       position: absolute;
+<       background-color: white;
+<       font-size: 0.75rem;
+<       color: black;
+<       padding: 0.25rem 0.5rem;
+<       border: 1px solid #e5e7eb;
+<       border-radius: 0.25rem;
+<       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+---
+>       @apply absolute bg-white text-xs text-black px-2 py-1 border rounded shadow-md;
+20d10
+<       pointer-events: none;
+23a14,29
+> <body>
+> <main>
+> <div id="imgdiv">
+> 
+> </div>
+> </main>
+> </body>
+> </html>
+> <!DOCTYPE html>
+> <html lang="en">
+> <head>
+>   <meta charset="UTF-8" />
+>   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+>   <title>Image Grid Overlay</title>
+>   <script src="https://cdn.tailwindcss.com"></script>
+> </head>
+25c31
+<   <div id="container" class="relative w-[1077px] h-[791px]">
+---
+>   <div class="relative w-[1077px] h-[791px]">
+28d33
+< 
+30,31c35
+<     <div id="tooltip" class="tooltip"></div>
+< 
+---
+>         <div id="tooltip" class="tooltip"></div>
+34c38,70
+<       <!-- Cells added via JS -->
+---
+>       <!-- Generate 150 grid cells -->
+>       <script>
+>           document.addEventListener('DOMContentLoaded', () => {
+>             const overlay = document.getElementById('gridOverlay');
+>             const tooltip = document.getElementById('tooltip');
+> 
+>             for (let i = 0; i < 600; i++) {
+>               const row = Math.floor(i / 30) + 1;
+>               const col = (i % 30) + 1;
+> 
+>               const cell = document.createElement('div');
+>               cell.className = 'border border-blue-200 border-opacity-50 relative';
+>               cell.dataset.row = row;
+>               cell.dataset.col = col;
+> 
+>               cell.addEventListener('click', (e) => {
+>                 const rect = e.target.getBoundingClientRect();
+>                 tooltip.style.left = `${e.clientX}px`;
+>                 tooltip.style.top = `${e.clientY}px`;
+>                 tooltip.innerText = `Row: ${row}, Col: ${col}`;
+>                 tooltip.style.display = tooltip.style.display === 'none' ? 'block' : 'none';
+>               });
+> 
+>               overlay.appendChild(cell);
+>             }
+> 
+>             document.addEventListener('click', (e) => {
+>               if (!e.target.closest('#gridOverlay')) {
+>                 tooltip.style.display = 'none';
+>               }
+>             });
+>           });
+>         </script>
+37,94d72
+< 
+<   <script>
+<     document.addEventListener('DOMContentLoaded', () => {
+<       const overlay = document.getElementById('gridOverlay');
+<       const tooltip = document.getElementById('tooltip');
+<       const container = document.getElementById('container');
+<       const clickedCells = [];
+<       let tooltipTimeout;
+< 
+<       const base = 15;
+<       const factor = 2;
+<       for (let i = 0; i < base*10*factor*factor; i++) {
+<         const row = Math.floor(i / (base*factor)) + 1;
+<         const col = (i % (base*factor)) + 1;
+< 
+<         const cell = document.createElement('div');
+<         cell.className = 'border border-blue-200 border-opacity-50 relative';
+<         cell.dataset.row = row;
+<         cell.dataset.col = col;
+< 
+<         cell.addEventListener('click', (e) => {
+<           e.stopPropagation();
+<           const offsetX = 8;
+<           const offsetY = 8;
+<           const containerRect = container.getBoundingClientRect();
+<           const x = e.clientX - containerRect.left + offsetX;
+<           const y = e.clientY - containerRect.top + offsetY;
+< 
+<           // Update tooltip position and content
+<           tooltip.style.left = `${x}px`;
+<           tooltip.style.top = `${y}px`;
+<           tooltip.innerText = `Row: ${row}, Col: ${col}`;
+<           tooltip.style.display = 'block';
+< 
+<           // Clear previous timeout
+<           clearTimeout(tooltipTimeout);
+< 
+<           // Set new timeout to hide tooltip after 10s
+<           tooltipTimeout = setTimeout(() => {
+<             tooltip.style.display = 'none';
+<           }, 10000);
+< 
+<           // Store clicked cell
+<           clickedCells.push({ row, col });
+<           console.log(JSON.stringify(clickedCells));
+<         });
+< 
+<         overlay.appendChild(cell);
+<       }
+< 
+<       document.addEventListener('click', (e) => {
+<         if (!e.target.closest('#gridOverlay')) {
+<           tooltip.style.display = 'none';
+<           clearTimeout(tooltipTimeout);
+<         }
+<       });
+<     });
+<   </script>
