@@ -1,0 +1,40 @@
+rownr,charging_status,battery_level,charging_time,discharging_time,geolocation_lat,geolocation_lon,zip+city,country,vehicle
+0,No,48,,1,47.5109967,8.5231287,8180 Bülach,Switzerland,SBB S9
+1,No,51,,1,47.6757113,8.6127883,8447 Dachsen,Switzerland,SBB S9
+2,No,56,,1,47.759024,8.8409286,78224 Singen (Hohentwiel),Germany,RE 2
+3,No,58,,1,47.8561014,8.7724731,78234 Engen,Germany,RE 2
+4,No,64,,2,47.9393358,8.5323209,78166 Donaueschingen,Germany,RE 2
+5,Yes,57,,0,47.929172,8.490261,78183 Hüfingen,Germany,S 10
+6,No,44,,1,47.8934174,8.4463498,78199 Bräunlingen,Germany,S 10
+7,No,45,,1,47.8883632,8.3966888,79843 Löffingen,Germany,S 10
+8,No,46,,1,47.8854502,8.340816,79843 Löffingen,Germany,S 10
+9,No,46,,1,47.8980657,8.2806867,79877 Rötenbach Friedenweiler,Germany,S 10
+10,No,47,,1,47.9236529,8.1932578,79822 Titisee-Neustadt,Germany,S 10
+11,No,48,,1,47.9021279,8.1531423,79822 Titisee-Neustadt,Germany,S 10
+12,No,50,,1,47.9102005,8.1069249,79856 Hinterzarten,Germany,S 10
+13,No,50,,1,47.9673655,7.9665289,79199 Kirchzarten,Germany,S 10
+14,No,51,,1,47.9677992,7.9587798,79199 Kirchzarten,Germany,S 10
+15,No,51,,1,47.9832656,7.8852907,79117 Freiburg im Breisgau,Germany,S 10
+16,No,52,,1,47.9826295,7.8537725,79102 Freiburg im Breisgau,Germany,S 10
+17,No,79,,3,47.957366,7.7769564,79285 Ebringen,Germany,RB 27
+18,No,80,,3,47.9169973,7.7069087,79189 Bad Krozingen,Germany,RB 27
+19,No,81,,3,47.8696568,7.6295503,79426 Buggingen,Germany,RB 27
+20,No,82,,3,47.8237468,7.614929,79379 Müllheim,Germany,RB 27
+21,No,83,,3,47.800127,7.5734287,79424 Auggen,Germany,RB 27
+22,No,84,,3,47.6547862,7.470835,68510 Sierentz,France,RB 27
+23,No,86,,3,47.7313464,7.5494217,79415 Bad Bellingen,Germany,RB 27
+24,No,88,,4,47.6541914,7.5646311,79588 Efringen-Kirchen,Germany,RB 27
+25,No,90,,4,47.5846536,7.6016715,4057 Basel,Switzerland,RB 27
+26,No,92,,4,47.5510751,7.6603432,79639 Grenzach-Wyhlen,Germany,RB 30
+27,No,93,,4,47.5373923,7.6896184,79639 Grenzach-Wyhlen,Germany,RB 30
+28,No,93,,4,47.5499335,7.7394777,79618 Rheinfelden (Baden),Germany,RB 30
+29,No,95,,4,47.5522292,7.7920082,4310 Rheinfelden,Switzerland,SBB IR 36
+30,No,97,,4,47.549568,7.9050026,4322 Mumpf,Switzerland,SBB IR 36
+31,Yes,96,,0,47.505862,8.0121329,5070 Frick,Switzerland,SBB IR 36
+32,Yes,94,,0,47.5027544,8.0361259,5070 Frick,Switzerland,SBB IR 36
+33,Yes,90,,0,47.4765532,8.1006602,5078 Effingen,Switzerland,SBB IR 36
+34,Yes,69,,0,47.4840614,8.2102936,5200 Brugg,Switzerland,SBB IR 36
+35,Yes,59,,0,47.4860433,8.2670107,5300 Turgi,Switzerland,SBB IR 36
+36,No,47,,1,47.4751197,8.3071974,5400 Baden,Switzerland,SBB IR 36
+37,No,47,,1,47.4564261,8.3251004,5432 Neuenhof,Switzerland,SBB IR 36
+38,No,54,,1,47.4126971,8.5294711,8050 Zürich,Switzerland,SBB S6
