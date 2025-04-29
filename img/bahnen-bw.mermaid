@@ -1,0 +1,43 @@
+%%{ init: { "theme": "default", "themeVariables": { "fontSize": "10px" }}}%%
+graph XY
+
+%% Städte mit Koordinaten (Longitude = x, Latitude = y)
+Offenburg["Offenburg"]:::nodeAt(7.9456, 48.4738)
+Singen_Hohentwiel["Singen (Hohentwiel)"]:::nodeAt(8.8400, 47.7628)
+Freiburg["Freiburg"]:::nodeAt(7.8500, 47.9950)
+Donaueschingen["Donaueschingen"]:::nodeAt(8.4978, 47.9514)
+Mannheim["Mannheim"]:::nodeAt(8.4661, 49.4878)
+Basel["Basel"]:::nodeAt(7.5906, 47.5547)
+Stuttgart["Stuttgart"]:::nodeAt(9.1833, 48.7833)
+Ulm["Ulm"]:::nodeAt(9.9830, 48.4000)
+Rastatt["Rastatt"]:::nodeAt(8.2050, 48.8585)
+Freudenstadt["Freudenstadt"]:::nodeAt(8.4114, 48.4639)
+Karlsruhe["Karlsruhe"]:::nodeAt(8.4039, 49.0092)
+Heilbronn["Heilbronn"]:::nodeAt(9.2170, 49.1500)
+Pforzheim["Pforzheim"]:::nodeAt(8.7050, 48.8950)
+Horb["Horb"]:::nodeAt(8.6911, 48.4453)
+Bad_Wildbad["Bad Wildbad"]:::nodeAt(8.5506, 48.7503)
+Aalen["Aalen"]:::nodeAt(10.0930, 48.8370)
+Radolfzell["Radolfzell"]:::nodeAt(8.9714, 47.7383)
+Lindau["Lindau"]:::nodeAt(9.6920, 47.5480)
+Hechingen["Hechingen"]:::nodeAt(8.9630, 48.3510)
+Gammertingen["Gammertingen"]:::nodeAt(9.2250, 48.2470)
+Tuebingen["Tübingen"]:::nodeAt(9.0576, 48.5216)
+Plochingen["Plochingen"]:::nodeAt(9.4200, 48.7080)
+Braeunlingen["Bräunlingen"]:::nodeAt(8.4500, 47.9330)
+
+%% Bahnlinien (Verbindungen)
+Offenburg ---|Schwarzwaldbahn| Singen_Hohentwiel
+Freiburg ---|Höllentalbahn| Donaueschingen
+Mannheim ---|Rheintalbahn| Basel
+Stuttgart ---|Filstalbahn| Ulm
+Stuttgart ---|Gäubahn| Singen_Hohentwiel
+Rastatt ---|Murgtalbahn| Freudenstadt
+Karlsruhe ---|Kraichgaubahn| Heilbronn
+Pforzheim ---|Nagoldtalbahn| Horb
+Pforzheim ---|Enztalbahn| Bad_Wildbad
+Stuttgart ---|Remsbahn| Aalen
+Radolfzell ---|Bodenseegürtelbahn| Lindau
+Hechingen ---|Hohenzollerische Landesbahn| Gammertingen
+Tuebingen ---|Obere Neckarbahn| Plochingen
+Braeunlingen ---|Schwarzwald-Baar-Bahn| Donaueschingen
